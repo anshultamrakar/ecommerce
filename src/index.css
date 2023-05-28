@@ -1,0 +1,571 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* Header */
+
+.Header {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #38bdf8;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+   /* display: none;  */
+}
+
+/* Search Component */
+input[type="text"] {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+button{
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2rem;
+  padding: 0.25rem;
+  border-radius: 0.2rem;
+}
+
+/* Navbar */
+
+.navbar_list {
+  list-style-type: none;
+  display: flex;
+  gap: 70px;
+  font-size: 1.8rem;
+}
+
+.navbar-cart {
+  position: relative;
+}
+
+.navbar-wish {
+  position: relative;
+}
+
+.navbar_count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: red;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  color: #000;
+  text-decoration: none;
+}
+
+/* Landing Page / Home page  */
+
+.Home {
+  min-height: 100vh;
+  margin-top: 33px;
+}
+
+.Home_image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Home_image img{
+  position: relative;
+}
+
+.Home_text {
+  position: absolute;
+  top: 453px;
+  right: 338px;
+}
+
+.Home_text h1 {
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.Home_text button {
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #38bdf8;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.category_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.category {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 40px;
+}
+
+.category_list {
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 300px;
+  padding: 20px;
+}
+
+.category_list img {
+  width: 100%;
+  height: auto;
+}
+
+.explore_collection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.our_collection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+}
+
+.collection_card {
+  border: 2px solid gray;
+  border-radius: 5px;
+}
+
+.collection_card img {
+  width: 100%;
+  height: auto;
+}
+
+/* WishList */
+.wishlist {
+  min-height: 100vh;
+  margin: 155px 61px 150px 120px;
+  padding: 50px;
+}
+.cartItems {
+  min-height: 100vh;
+  margin: 155px 61px 150px 120px;
+  padding: 50px;
+}
+
+/* Product_list Page */
+
+.Product_list {
+  margin: 190px 40px 0px 20px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+
+.qty_product {
+  font-size: 1rem;
+}
+
+.filter_heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.side_bar {
+  margin: 30px;
+  padding: 20px;
+}
+
+.product_listItems {
+  padding-left: 60px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-items {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.product-list {
+  border: 2px solid gray;
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-list p {
+  font-weight: bold;
+}
+
+.product-list img {
+  width: 250px;
+  height: 200px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.product-list button {
+  width: 100%;
+  border: none;
+  min-height: 40px;
+  background-color: #38bdf8;
+  border-radius: 0px 0px 8px 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.like-wishlist {
+  position: absolute;
+  top: 0px;
+  font-size: 1.5rem;
+  padding: 5px 5px 0px 0px;
+  right: 0px;
+}
+
+.wishlist-button {
+  background-color: papayawhip;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+
+/* Product Details page */
+.productDetails{
+  min-height: 100vh;
+  margin: 200px 150px 0px 150px;
+}
+
+.productDetails_product{
+   margin: 150px;
+   border:2px solid gray ;
+   padding: 20px;
+} 
+
+.prductDetails_details{
+  display: flex;
+  gap: 50px;
+}
+
+.prductDetails_details img {
+  width: 500px;
+  height: auto;
+}
+
+.productDetails_qtyhandle{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.product_description{
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
+
+/* .product_description {
+  background-color: #38bdf8;
+  color: #fff;
+  border: 1px solid gray;
+  padding: 15px;
+
+} */
+
+.productDetails_btns{
+  display: flex;
+  gap: 50px;
+
+}
+
+/* Cart Page */
+
+.cartItem_layout{
+  display: flex;
+  
+}
+
+.cartItems{
+  display: flex;
+  flex-direction: column;
+}
+
+.cartItems_items{
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.cartItems_listItems{
+  border : 1px solid gray;
+  padding: 20px;
+  margin: 10px;
+  width: 83%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+.cartItems_listItems img {
+  width: 40%;
+}
+
+.cartItems_details{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ gap : 10px;
+}
+
+.cartItems_qty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.price_details{
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 269px;
+  width: 500px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  gap : 10px;
+}
+
+.price_details_list{
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.price_details_list_btn{
+  background-color: #38bdf8;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Missing Page */
+
+.Missing {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Registration Page */
+.Register{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+section {
+  width: 100%;
+  max-width: 420px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: #333;
+  border-radius: 10px;
+  color: #fff;
+}
+.Register form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 1rem;
+}
+
+.Register a {
+  color: #fff;
+
+}
+
+.Register input[type="text"],
+input[type="password"],
+textarea {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.hide {
+  display: none;
+}
+
+.valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.line {
+  display: inline-block;
+}
+
+
+/* Login Page */
+
+.Login{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap : 15px;
+  padding-bottom: 1rem;
+}
+
+.Login a {
+  color: #fff;
+
+}
+
+.login_section{
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+
+/* Footer CSS */
+.Footer {
+  display: flex;
+  background-color: #333;
+  color: #fff;
+  padding: 2rem;
+  justify-content: space-evenly;
+}
+
+.about_brand {
+  max-width: 300px;
+}
+
+.social_handles ul {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.Footer ul {
+  list-style-type: none;
+}
+
+.footer_copyright {
+  display: grid;
+  place-content: center;
+  color: #fff;
+  background-color: #333;
+  padding: 1rem;
+}
+
+
