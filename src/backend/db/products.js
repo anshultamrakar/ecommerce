@@ -15,6 +15,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false, 
     categoryName: "Chair",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -25,6 +26,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Chair",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -35,6 +37,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Chair",
+    quantity : 1 ,
   },
 
   {
@@ -46,6 +49,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Sofa",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -56,6 +60,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Chair",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -66,6 +71,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Chair",
+    quantity : 1 ,
   },
   
   {
@@ -77,6 +83,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Chair",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -87,6 +94,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Chair",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -97,6 +105,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Bed",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -107,6 +116,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false ,
     categoryName: "Bed",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -117,6 +127,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Chair",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -127,6 +138,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Bed",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -137,6 +149,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Bed",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -147,6 +160,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Bed",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -157,6 +171,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Bed",
+    quantity : 1 ,
   },
   {
     _id: uuid(),
@@ -167,6 +182,7 @@ export const products = [
     isAddedToWish : false, 
     isAddedToCart : false,
     categoryName: "Bed",
+    quantity : 1 ,
   },
 ];
 

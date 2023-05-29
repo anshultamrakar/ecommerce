@@ -74,6 +74,8 @@ const DataProvider = ({ children }) => {
   const handleRemoveCart = (id) => {
     const filterCartItem = cartItems.filter(item => item.id !== id)
     setCartItems(filterCartItem)
+    const removedCartList = products.map(item => item.id === id ? {...item , isAddedToCart : !item.isAddedToCart} : item)
+    setProducts(removedCartList)
    }
 
   return (
@@ -85,6 +87,7 @@ const DataProvider = ({ children }) => {
         categories,
         handleWishList,
         wishItems,
+        setCartItems,
         handleRemoveCart,
         cartItems,
         setAuth,
