@@ -220,7 +220,7 @@ button{
 }
 
 .product_listItems {
-  padding-left: 60px;
+  padding-left: 52px;
   padding-bottom: 40px;
   display: flex;
   flex-direction: column;
@@ -264,6 +264,63 @@ button{
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+}
+
+
+.filter_category{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.filter_category h4{
+  font-size: 1.5rem;
+  margin-bottom: 10px ;
+}
+
+.filter_ratings h4{
+  font-size: 1.5rem;
+  margin-bottom: 10px ;
+  margin-top: 10px;
+}
+
+.filter_sort h4{
+  font-size: 1.5rem;
+  margin-bottom: 10px ;
+  margin-top: 10px;
+}
+
+.filter_price h4{
+  font-size: 1.5rem;
+  margin-bottom: 10px ;
+  margin-top: 10px;
+}
+
+.filter_category input[type ="checkbox"]{
+  width: 18px;
+  height: 18px;
+}
+
+
+.filter_inputs{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 13px;
+  font-size: 1.2rem;
+}
+
+.filter_price input[type = "range"]{
+  width: 100%;
+}
+
+.filter_ratings input[type = "radio"]{
+  width: 18px;
+  height: 18px;
+}
+
+.filter_sort input[type = "radio"]{
+  width: 18px;
+  height: 18px;
 }
 
 .like-wishlist {

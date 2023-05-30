@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -9,65 +8,90 @@ import { DataContext } from "../Context/DataContext";
 
 const Products = () => {
   const {products , isLoading , handleAddToCart , handleWishList } = useContext(DataContext)
+
+  const [categoryValue , setCategoryValue] = useState("")
+
+  
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    
   },[])
 
+
+  useEffect(() => {
+    
+  },[categoryValue])
+
+
+console.log(categoryValue)
   return (
     <div className="Product_list">
       <aside>
         <div className="filter_heading">
           <h2>Filters</h2>
-          <p>Clear</p>
+          <h4 style = {{textDecoration : "underline"}}>Clear</h4>
         </div>
-        <div>
+        <div className="filter_price">
           <h4>Price</h4>
-          <input type="range" id="volume" name="volume" min="0" max="11" />
+          <input type="range" min="50" max="100" />
         </div>
-        <div>
+        <div className="filter_category">
           <h4>Category</h4>
-          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-          <label for="vehicle1"> I have a bike</label>
-          <br />
-          <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" />
-          <label for="vehicle2"> I have a car</label>
-          <br />
-          <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" />
-          <label for="vehicle3"> I have a boat</label>
-          <br />
+          <div className="filter_inputs">
+          <input type="checkbox" id="sofas"  value= {categoryValue} onChange = {() => setCategoryValue("sofas")} />
+          <label htmlFor="sofas">Sofas</label>
+          </div>
+          <div className="filter_inputs">
+          <input type="checkbox" id="beds"  value= {categoryValue} onChange={() => setCategoryValue("beds")} />
+          <label htmlFor="beds">Beds</label>
+          </div>
+          <div className="filter_inputs">
+          <input type="checkbox" id="tables"  value= {categoryValue} onChange={() => setCategoryValue("tables")} />
+          <label htmlFor="tables">Tables</label>
+          </div>
+          <div className="filter_inputs">
+          <input type="checkbox" id="dinning" value= {categoryValue} onChange={() => setCategoryValue("dinning")} />
+          <label  htmlFor="dinning">Dining Table</label>
+          </div>
         </div>
-        <div>
+        <div className="filter_ratings">
           <h4>Rating</h4>
+          <div className="filter_inputs">
           <input type="radio" id="html" name="fav_language" value="HTML" />
-          <label for="html">HTML</label>
-          <br />
+          <label for="html">4 Star & above </label>
+          </div>
+          <div className="filter_inputs">
           <input type="radio" id="css" name="fav_language" value="CSS" />
-          <label for="css">CSS</label>
-          <br />
-          <input
+          <label for="css">3 Star & above</label>
+          </div>
+         <div className="filter_inputs">
+         <input
             type="radio"
             id="javascript"
             name="fav_language"
             value="JavaScript"
           />
-          <label for="javascript">JavaScript</label>
-          <br />
+          <label for="javascript">2 Star & above</label>
+         </div>
+          <div className="filter_inputs">
           <input type="radio" id="javascript" name="fav_language" value="PHP" />
-          <label for="javascript">PHP</label>
+          <label for="javascript">1 Start & above</label>
+          </div>
         </div>
-        <div>
+        <div className="filter_sort">
           <h4>Sort By</h4>
+          <div className="filter_inputs">
           <input
             type="radio"
-            id="javascript"
-            name="fav_language"
-            value="JavaScript"
+            id="lowHigh"
           />
-          <label for="javascript">Price - Low to High</label>
-          <br />
+          <label htmlFor="lowHigh">Price - Low to High</label>
+          </div>
+      
+          <div className="filter_inputs">
           <input type="radio" id="javascript" name="fav_language" value="PHP" />
           <label for="javascript">Price - High to low</label>
+          </div>
+       
         </div>
       </aside>
       <div className="product_listItems">
