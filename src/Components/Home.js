@@ -49,7 +49,7 @@ const {categories} = useContext(DataContext)
         <ul className="category">
           {categories.map(category => (
           <li className="category_list legend" key = {category.id}>
-              <Link to = {`/category/${category._id}`}><img src = {category.imgUrl}/></Link> 
+              <Link to = {`/categories/${category.categoryName}`}><img src = {category.imgUrl}/></Link> 
               <h4>{category.categoryName}</h4>
             </li>
           ))}

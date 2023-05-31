@@ -1,28 +1,25 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ToastContainer } from 'react-toastify';
 import { DataContext } from "../Context/DataContext";
 
 const Products = () => {
-  const {products , isLoading , handleAddToCart , handleWishList } = useContext(DataContext)
-
-  const [categoryValue , setCategoryValue] = useState("")
-
+  let {categoryId} = useParams()
   
+  const {products , isLoading , handleAddToCart , handleWishList , setProducts , categories } = useContext(DataContext)
+  const [categoryValue , setCategoryValue] = useState("")
+ 
+
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },[])
 
 
-  useEffect(() => {
-    
-  },[categoryValue])
-
-
-console.log(categoryValue)
+  console.log(categoryValue)
   return (
     <div className="Product_list">
       <aside>

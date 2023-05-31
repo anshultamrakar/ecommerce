@@ -13,7 +13,7 @@ export const categories = [
   },
   {
     _id: uuid(),
-    categoryName: "Beds",
+    categoryName: "Bed",
     imgUrl:"https://img.freepik.com/free-psd/cozy-bedroom-hotel-room-with-double-bed-wooden-furniture_176382-1511.jpg?size=626&ext=jpg&ga=GA1.1.575613539.1683106157&semt=sph",
   },
   {
@@ -28,13 +28,8 @@ export const categories = [
   },
   {
     _id: uuid(),
-    categoryName: "Office_Tables",
+    categoryName: "Tables",
     imgUrl:"https://img.freepik.com/free-photo/business-desk-concept-with-laptop_23-2149073032.jpg?size=626&ext=jpg&ga=GA1.1.575613539.1683106157&semt=ais",
-  },
-  {
-    _id: uuid(),
-    categoryName: "Coffee_Tables",
-    imgUrl:"https://img.freepik.com/free-photo/high-angle-coffee-cup-book-table_23-2149678902.jpg?size=626&ext=jpg&ga=GA1.2.575613539.1683106157&semt=ais",
   },
   {
     _id: uuid(),
