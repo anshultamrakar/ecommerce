@@ -9,17 +9,15 @@ import { DataContext } from "../Context/DataContext";
 
 const Products = () => {
   let {categoryId} = useParams()
-  
   const {products , isLoading , handleAddToCart , handleWishList , setProducts , categories } = useContext(DataContext)
   const [categoryValue , setCategoryValue] = useState("")
- 
+  const [priceRange , setPriceRange] = useState("");
+
 
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },[])
 
-
-  console.log(categoryValue)
   return (
     <div className="Product_list">
       <aside>
@@ -29,7 +27,7 @@ const Products = () => {
         </div>
         <div className="filter_price">
           <h4>Price</h4>
-          <input type="range" min="50" max="100" />
+          <input type="range" min="2999" max="55000" value = {priceRange} onChange={(e) => setPriceRange(e.target.value)} />
         </div>
         <div className="filter_category">
           <h4>Category</h4>

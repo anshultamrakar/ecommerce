@@ -349,6 +349,19 @@ button{
   margin: 200px 150px 0px 150px;
 }
 
+.productDetails p {
+  font-size: 1.5rem;
+  font-weight:400;
+}
+
+.productDetails button {
+  background-color: #38bdf8;
+  color: #333;
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .productDetails_product{
    margin: 150px;
    border:2px solid gray ;

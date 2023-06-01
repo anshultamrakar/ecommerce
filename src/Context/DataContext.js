@@ -86,6 +86,7 @@ const DataProvider = ({ children }) => {
         handleAddToCart,
         categories,
         handleWishList,
+        handleWishList,
         setProducts,
         wishItems,
         setCartItems,

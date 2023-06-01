@@ -7,8 +7,9 @@ import { useEffect, useState } from "react";
 
 const ProductDetails = () => {
   let {productId} = useParams();
-  const {  handleAddToCart } = useContext(DataContext);
+  const {  handleAddToCart , handleWishList } = useContext(DataContext);
   const [productDetailsItem ,setProductDetailsItems] = useState({})
+  const [productQty , setProductQty] = useState(1)
 
   const getProductDetails = async() => {
     try{
@@ -18,7 +19,18 @@ const ProductDetails = () => {
     }catch(err){
       console.log(err)
     }
-   
+  }
+
+
+  const handleIncrement = () => {
+    const incrementQty = {...productDetailsItem , quantity : productDetailsItem.quantity + 1}
+    setProductDetailsItems(incrementQty)
+
+  }
+
+  const handleDecrement = () => {
+   const decrementQty = {...productDetailsItem , quantity : productDetailsItem.quantity - 1}
+   setProductDetailsItems(decrementQty)
   }
 
   useEffect(() => {
@@ -38,17 +50,17 @@ const ProductDetails = () => {
             <h4>50% OFF</h4>
             <p>{productDetailsItem?.description}</p>
             <div className="productDetails_btns">
-            <button>Save for later</button>
-            <button onClick={() => handleAddToCart(productDetailsItem.id)}>
+            <button  onClick={() => handleWishList(productDetailsItem.id)} >Save for later</button>
+            <button   onClick={() => handleAddToCart(productDetailsItem.id)}>
               Add To Cart
             </button>
             </div>
             <br/>
             <div className="productDetails_qtyhandle">
               <h3>Quantity :</h3>
-              <button>+</button>
-              <h3>5</h3>
-              <button>-</button>
+              <button onClick={handleIncrement}>+</button>
+              <h3 style = {{fontSize : "1.5rem"}}>{productDetailsItem?.quantity}</h3>
+              <button onClick={handleDecrement} disabled = {productDetailsItem?.quantity === 1 ? true : false}>-</button>
             </div>
           </div>
         </div>
