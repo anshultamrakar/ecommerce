@@ -7,33 +7,38 @@ import { useContext } from "react";
 import { ToastContainer } from 'react-toastify';
 import { DataContext } from "../Context/DataContext";
 
+const categoryInput = ['Sofas' , "Bed" , "Tables" , "Chairs" , "Wardrobe" , "Dinning Table"]
+
 const Products = () => {
-  const {products , isLoading , handleAddToCart , handleWishList , setProducts , categories , setCategories , searchResult , setSearchResult } = useContext(DataContext)
-  const [categoryValue , setCategoryValue] = useState("")
- 
+  const {products , isLoading , handleAddToCart , handleWishList  , selectedOption , setSelectedOption , checkboxFilter , setCheckBoxFilter } = useContext(DataContext)
 
-
-  const handleClear = () => {
-    setCategoryValue("")
-  }
 
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },[])
 
 
-  useEffect(() => {
-    const filterResult = products.map(item => item.categoryName === categoryValue ? {...item , checked : !item.checked} : item)
-    setProducts(filterResult)
-  },[categoryValue])
 
+  const handleCheckboxInput = (e) => {
+   const {checked , value} = e.target
+   if(checked){
+    setCheckBoxFilter([...checkboxFilter , value])
+   }else{
+    const filterByCategory = checkboxFilter.filter(item => item !== value)
+    setCheckBoxFilter(filterByCategory)
+   }
+  }
+
+  
+  const filteredProducts =  checkboxFilter.length > 0 ?  products.filter(item => checkboxFilter.includes(item.categoryName)) : products
+  
 
   return (
     <div className="Product_list">
       <aside>
         <div className="filter_heading">
           <h2>Filters</h2>
-          <h4 onClick={handleClear} style = {{textDecoration : "underline"}}>Clear</h4>
+          <h4 style = {{textDecoration : "underline"}}>Clear</h4>
         </div>
         <div className="filter_price">
           <h4>Price</h4>
@@ -41,30 +46,13 @@ const Products = () => {
         </div>
         <div className="filter_category">
           <h4>Category</h4>
-         <div className="filter_inputs">
-          <input type="checkbox" id="sofas"  value = {categoryValue}  onChange = {() => setCategoryValue("Sofas")} />
-          <label htmlFor="sofas">Sofas</label>
-          </div>
-          <div className="filter_inputs">
-          <input type="checkbox" id="beds" value={categoryValue}  onChange={() => setCategoryValue("Bed")} />
-          <label htmlFor="beds">Beds</label>
-          </div>
-          <div className="filter_inputs">
-          <input type="checkbox" id="tables"  value = {categoryValue}  onChange={() => setCategoryValue("Tables")} />
-          <label htmlFor="tables">Tables</label>
-          </div>
-          <div className="filter_inputs">
-          <input type="checkbox" id="tables"  value = {categoryValue}  onChange={() => setCategoryValue("Chairs")} />
-          <label htmlFor="tables">Chairs</label>
-          </div>
-          <div className="filter_inputs">
-          <input type="checkbox" id="dinning" value = {categoryValue} onChange={() => setCategoryValue("Wardrobe")} />
-          <label  htmlFor="dinning">Wardrobe</label>
-          </div>
-          <div className="filter_inputs">
-          <input type="checkbox" id="dinning" value = {categoryValue} onChange={() => setCategoryValue("dinning")} />
-          <label  htmlFor="dinning">Dinning Table</label>
-          </div> 
+          {categoryInput.map(item => (
+              <div className="filter_inputs">
+              <input type="checkbox" id= {item}  value = {item} onChange={handleCheckboxInput} />
+              <label htmlFor= {item}>{item}</label>
+              </div>
+            ))
+          }
         </div>
         <div className="filter_ratings">
           <h4>Rating</h4>
@@ -96,15 +84,14 @@ const Products = () => {
           <input
             type="radio"
             id="lowHigh"
+            value = "option1" checked = { selectedOption === "option1"} onChange={(e) => setSelectedOption(e.target.value)}
           />
           <label htmlFor="lowHigh">Price - Low to High</label>
           </div>
-      
           <div className="filter_inputs">
-          <input type="radio" id="javascript" name="fav_language" value="PHP" />
-          <label for="javascript">Price - High to low</label>
+          <input type="radio" id="HighLow"  value = "option2" checked = { selectedOption === "option2"} onChange={(e) => setSelectedOption(e.target.value)}/>
+          <label htmlFor="HighLow">Price - High to low</label>
           </div>
-       
         </div>
       </aside>
       <div className="product_listItems">
@@ -113,7 +100,7 @@ const Products = () => {
           <span className="qty_product">({`Showing ${products.length} products`})</span>
         </h2>
         <ul className="product-items">
-          {isLoading ? <p>Loading.......</p> : searchResult.map((product) => (
+          {isLoading ? <p>Loading.......</p> : filteredProducts.map((product) => (
             <li className="product-list" key={product._id}>
              <Link to = {`${product._id}`}><img src={product.img} /></Link> 
               <h4>{product.title}</h4>

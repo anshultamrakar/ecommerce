@@ -10,9 +10,9 @@ const DataProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [wishItems, setWishItems] = useState([]);
   const [categories, setCategories] = useState([]);
-
   const [search , setSearch] = useState("")
-  const [searchResult , setSearchResult] = useState([])
+  const [checkboxFilter , setCheckBoxFilter] = useState([])
+  const [selectedOption, setSelectedOption] = useState("option1")
   const [auth, setAuth] = useState({});
 
   const getAllCategory = async () => {
@@ -38,16 +38,12 @@ const DataProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const filterResult = products.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
-    setSearchResult(filterResult)
-   }, [products,  search])
-
  
   useEffect(() => {
     getProductData();
     getAllCategory();
   }, []);
+
 
   const handleAddToCart = (id) => {
     const cartProduct = products.map((item) =>
@@ -60,6 +56,7 @@ const DataProvider = ({ children }) => {
     setCartItems(filterCart);
   };
 
+
   const handleWishList = (id) => {
     const wishProduct = products.map((item) =>
       item.id === id  ? { ...item, isAddedToWish: !item.isAddedToWish } : item
@@ -70,6 +67,7 @@ const DataProvider = ({ children }) => {
     setWishItems(filterWish);
     setProducts(wishProduct);
   };
+
 
   const handleRemoveWishlist = (id) => {
    const filterWishlist = wishItems.filter(item => item.id !== id)
@@ -94,12 +92,13 @@ const DataProvider = ({ children }) => {
         search,
         setSearch,
         handleAddToCart,
+        checkboxFilter , setCheckBoxFilter,
+        setSelectedOption,
         categories,
         handleWishList,
         handleWishList,
         setProducts,
         setCategories,
-        searchResult , setSearchResult,
         wishItems,
         setCartItems,
         handleRemoveCart,

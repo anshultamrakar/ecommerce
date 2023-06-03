@@ -80,7 +80,7 @@ const Cart = () => {
         </div>
         <hr/>
         <p style = {{fontWeight : "bold"}}>You will save ₹ 1000 on this order</p>
-        <button className="price_details_list_btn">Place order</button>
+        <button className="price_details_list_btn">Checkout</button>
       </div> : ""}
     </div>
   );
