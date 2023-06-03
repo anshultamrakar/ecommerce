@@ -21,18 +21,6 @@ const ProductDetails = () => {
     }
   }
 
-
-  const handleIncrement = () => {
-    const incrementQty = {...productDetailsItem , quantity : productDetailsItem.quantity + 1}
-    setProductDetailsItems(incrementQty)
-
-  }
-
-  const handleDecrement = () => {
-   const decrementQty = {...productDetailsItem , quantity : productDetailsItem.quantity - 1}
-   setProductDetailsItems(decrementQty)
-  }
-
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     getProductDetails()
@@ -56,12 +44,7 @@ const ProductDetails = () => {
             </button>
             </div>
             <br/>
-            <div className="productDetails_qtyhandle">
-              <h3>Quantity :</h3>
-              <button onClick={handleIncrement}>+</button>
-              <h3 style = {{fontSize : "1.5rem"}}>{productDetailsItem?.quantity}</h3>
-              <button onClick={handleDecrement} disabled = {productDetailsItem?.quantity === 1 ? true : false}>-</button>
-            </div>
+          
           </div>
         </div>
       </div> 

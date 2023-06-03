@@ -8,45 +8,63 @@ import { ToastContainer } from 'react-toastify';
 import { DataContext } from "../Context/DataContext";
 
 const Products = () => {
-  let {categoryId} = useParams()
-  const {products , isLoading , handleAddToCart , handleWishList , setProducts , categories } = useContext(DataContext)
+  const {products , isLoading , handleAddToCart , handleWishList , setProducts , categories , setCategories , searchResult , setSearchResult } = useContext(DataContext)
   const [categoryValue , setCategoryValue] = useState("")
-  const [priceRange , setPriceRange] = useState("");
+ 
 
+
+  const handleClear = () => {
+    setCategoryValue("")
+  }
 
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },[])
+
+
+  useEffect(() => {
+    const filterResult = products.map(item => item.categoryName === categoryValue ? {...item , checked : !item.checked} : item)
+    setProducts(filterResult)
+  },[categoryValue])
+
 
   return (
     <div className="Product_list">
       <aside>
         <div className="filter_heading">
           <h2>Filters</h2>
-          <h4 style = {{textDecoration : "underline"}}>Clear</h4>
+          <h4 onClick={handleClear} style = {{textDecoration : "underline"}}>Clear</h4>
         </div>
         <div className="filter_price">
           <h4>Price</h4>
-          <input type="range" min="2999" max="55000" value = {priceRange} onChange={(e) => setPriceRange(e.target.value)} />
+          <input type="range" min="2999" max="55000"  onChange={(e) => console.log(e.target.value)} />
         </div>
         <div className="filter_category">
           <h4>Category</h4>
-          <div className="filter_inputs">
-          <input type="checkbox" id="sofas"  value= {categoryValue} onChange = {() => setCategoryValue("sofas")} />
+         <div className="filter_inputs">
+          <input type="checkbox" id="sofas"  value = {categoryValue}  onChange = {() => setCategoryValue("Sofas")} />
           <label htmlFor="sofas">Sofas</label>
           </div>
           <div className="filter_inputs">
-          <input type="checkbox" id="beds"  value= {categoryValue} onChange={() => setCategoryValue("beds")} />
+          <input type="checkbox" id="beds" value={categoryValue}  onChange={() => setCategoryValue("Bed")} />
           <label htmlFor="beds">Beds</label>
           </div>
           <div className="filter_inputs">
-          <input type="checkbox" id="tables"  value= {categoryValue} onChange={() => setCategoryValue("tables")} />
+          <input type="checkbox" id="tables"  value = {categoryValue}  onChange={() => setCategoryValue("Tables")} />
           <label htmlFor="tables">Tables</label>
           </div>
           <div className="filter_inputs">
-          <input type="checkbox" id="dinning" value= {categoryValue} onChange={() => setCategoryValue("dinning")} />
-          <label  htmlFor="dinning">Dining Table</label>
+          <input type="checkbox" id="tables"  value = {categoryValue}  onChange={() => setCategoryValue("Chairs")} />
+          <label htmlFor="tables">Chairs</label>
           </div>
+          <div className="filter_inputs">
+          <input type="checkbox" id="dinning" value = {categoryValue} onChange={() => setCategoryValue("Wardrobe")} />
+          <label  htmlFor="dinning">Wardrobe</label>
+          </div>
+          <div className="filter_inputs">
+          <input type="checkbox" id="dinning" value = {categoryValue} onChange={() => setCategoryValue("dinning")} />
+          <label  htmlFor="dinning">Dinning Table</label>
+          </div> 
         </div>
         <div className="filter_ratings">
           <h4>Rating</h4>
@@ -95,7 +113,7 @@ const Products = () => {
           <span className="qty_product">({`Showing ${products.length} products`})</span>
         </h2>
         <ul className="product-items">
-          {isLoading ? <p>Loading.......</p> :products.map((product) => (
+          {isLoading ? <p>Loading.......</p> : searchResult.map((product) => (
             <li className="product-list" key={product._id}>
              <Link to = {`${product._id}`}><img src={product.img} /></Link> 
               <h4>{product.title}</h4>
@@ -106,11 +124,11 @@ const Products = () => {
               <div  className="like-wishlist">
                 <div onClick={() => handleWishList(product.id)} className="wishlist-button">
                 { !product.isAddedToWish ? <AiOutlineHeart /> : <AiFillHeart/> }
-              <ToastContainer/>
               </div>
               </div>
             </li>
-          ))}
+           ))
+           }
         </ul>
       </div>
     </div>

@@ -10,6 +10,9 @@ const DataProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [wishItems, setWishItems] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  const [search , setSearch] = useState("")
+  const [searchResult , setSearchResult] = useState([])
   const [auth, setAuth] = useState({});
 
   const getAllCategory = async () => {
@@ -34,6 +37,11 @@ const DataProvider = ({ children }) => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    const filterResult = products.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
+    setSearchResult(filterResult)
+   }, [products,  search])
 
  
   useEffect(() => {
@@ -83,11 +91,15 @@ const DataProvider = ({ children }) => {
       value={{
         products,
         isLoading,
+        search,
+        setSearch,
         handleAddToCart,
         categories,
         handleWishList,
         handleWishList,
         setProducts,
+        setCategories,
+        searchResult , setSearchResult,
         wishItems,
         setCartItems,
         handleRemoveCart,

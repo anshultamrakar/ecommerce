@@ -5,14 +5,23 @@ import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
 import { useEffect  , useState} from "react";
 import axios from "axios";
+import Products from "./Products";
 
 const Home = () => {
-const {categories} = useContext(DataContext)
+const {categories , products , setProducts} = useContext(DataContext)
 
   // useEffect(() => {
   //   document.body.scrollTop = document.documentElement.scrollTop = 0;
   // }, [])
 
+
+ 
+    const handleCategoryFilter = (name) => {
+      const filterResult = products.filter(item => item.categoryName === name)
+      setProducts(filterResult)
+     }
+ 
+ 
 
   return (
     <div className="Home">
@@ -49,7 +58,7 @@ const {categories} = useContext(DataContext)
         <ul className="category">
           {categories.map(category => (
           <li className="category_list legend" key = {category.id}>
-              <Link to = {`/categories/${category.categoryName}`}><img src = {category.imgUrl}/></Link> 
+              <Link to = "/product"><img onClick={() => handleCategoryFilter(category.categoryName)} src = {category.imgUrl}/></Link> 
               <h4>{category.categoryName}</h4>
             </li>
           ))}
