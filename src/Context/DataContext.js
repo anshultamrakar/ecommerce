@@ -14,7 +14,7 @@ const DataProvider = ({ children }) => {
   const [search , setSearch] = useState("")
   const [searchResult , setSearchResult] = useState([])
   const [checkboxFilter , setCheckBoxFilter] = useState([])
- const [originalProductData , setOriginalProductData] = useState([])
+  const [originalProductData , setOriginalProductData] = useState([])
   const [auth, setAuth] = useState({});
 
   const getAllCategory = async () => {
@@ -85,17 +85,19 @@ const DataProvider = ({ children }) => {
     setProducts(removedCartList)
    }
 
+
   return (
     <DataContext.Provider
       value={{
         products,
         isLoading,
-        originalProductData,
         search,
         setSearch,
         searchResult, 
         setSearchResult,
+        originalProductData,
         handleAddToCart,
+        getProductData,
         checkboxFilter , setCheckBoxFilter,
         categories,
         handleWishList,

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import products from "../../src/backend/db/products"
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -9,19 +8,16 @@ import { ToastContainer } from 'react-toastify';
 import { DataContext } from "../Context/DataContext";
 
 const categoryInput = ['Sofas' , "Bed" , "Tables" , "Chairs" , "Wardrobe" , "Dinning Table"]
-const ratingInput = ["4 star", "3 star", "2 star" , "1 star"]
 
 const Products = () => {
-  const {products , setProducts,  isLoading , handleAddToCart , handleWishList , checkboxFilter , setCheckBoxFilter , search , originalProductData } = useContext(DataContext)
+  const {products , setProducts,  isLoading , handleAddToCart , handleWishList , checkboxFilter , setCheckBoxFilter , search , originalProductData , getProductData } = useContext(DataContext)
   const [priceRange , setPriceRange] = useState("")
   const [selectOption , setSelectOption] = useState("")
   const [ratingOption , setRatingOption] = useState("")
 
-
-
-
 useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
+    getProductData()
 },[])
 
 
@@ -50,14 +46,14 @@ useEffect(() => {
 },[ratingOption])
 
 
-useEffect(() => {
-  const filterResult = originalProductData.filter(item => item.price === priceRange)
-  setProducts(filterResult)
-},[priceRange])
+// useEffect(() => {
+//   const filterResult = originalProductData.filter(item => item.price === priceRange)
+//   setProducts(filterResult)
+// },[priceRange])
 
 
 console.log({products})
-console.log({originalProductData})
+
 
   const handleCheckboxInput = (e) => {
    const {checked , value} = e.target
@@ -69,11 +65,7 @@ console.log({originalProductData})
    }
   }
 
- const handlePriceRange = (e) => {
-  setPriceRange(e.target.value)
- }
 
-  
   const filteredProducts =  checkboxFilter.length > 0 ?  products.filter(item => checkboxFilter.includes(item.categoryName)) : products
   
 
@@ -86,7 +78,7 @@ console.log({originalProductData})
         </div>
         <div className="filter_price">
           <label htmlFor="pricerange">Price</label>
-          <input id = "pricerange" type="range" min= "2999" max= "55000" value = {priceRange}  onChange= {handlePriceRange} />
+          <input id = "pricerange" type="range" min= "2999" max= "55000"  />
         </div>
         <div className="filter_category">
           <h4>Category</h4>
