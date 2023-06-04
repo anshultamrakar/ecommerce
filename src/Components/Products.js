@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import products from "../../src/backend/db/products"
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -8,16 +9,55 @@ import { ToastContainer } from 'react-toastify';
 import { DataContext } from "../Context/DataContext";
 
 const categoryInput = ['Sofas' , "Bed" , "Tables" , "Chairs" , "Wardrobe" , "Dinning Table"]
+const ratingInput = ["4 star", "3 star", "2 star" , "1 star"]
 
 const Products = () => {
-  const {products , isLoading , handleAddToCart , handleWishList  , selectedOption , setSelectedOption , checkboxFilter , setCheckBoxFilter } = useContext(DataContext)
+  const {products , setProducts,  isLoading , handleAddToCart , handleWishList , checkboxFilter , setCheckBoxFilter , search , originalProductData } = useContext(DataContext)
+  const [priceRange , setPriceRange] = useState("")
+  const [selectOption , setSelectOption] = useState("")
+  const [ratingOption , setRatingOption] = useState("")
 
 
-  useEffect(() => {
+
+
+useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-  },[])
+},[])
 
 
+useEffect(() => {
+    const filterSearchResult = originalProductData.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
+    setProducts(filterSearchResult)
+}, [originalProductData,  search])
+
+
+
+useEffect(() => {
+  if(selectOption === "option1"){
+    const filterResult = [...products].sort((a, b) => a.price - b.price)
+    setProducts(filterResult)
+  }else{
+    const filterResult =  [...products].sort((a, b) => b.price - a.price)
+    setProducts(filterResult)
+  }
+},[selectOption])
+
+
+
+useEffect(() => {
+  const filterResult = originalProductData.filter(item => item.rating === ratingOption)
+  setProducts(filterResult)
+},[ratingOption])
+
+
+useEffect(() => {
+  const filterResult = originalProductData.filter(item => item.price === priceRange)
+  setProducts(filterResult)
+},[priceRange])
+
+
+console.log({products})
+console.log({originalProductData})
 
   const handleCheckboxInput = (e) => {
    const {checked , value} = e.target
@@ -28,6 +68,10 @@ const Products = () => {
     setCheckBoxFilter(filterByCategory)
    }
   }
+
+ const handlePriceRange = (e) => {
+  setPriceRange(e.target.value)
+ }
 
   
   const filteredProducts =  checkboxFilter.length > 0 ?  products.filter(item => checkboxFilter.includes(item.categoryName)) : products
@@ -41,8 +85,8 @@ const Products = () => {
           <h4 style = {{textDecoration : "underline"}}>Clear</h4>
         </div>
         <div className="filter_price">
-          <h4>Price</h4>
-          <input type="range" min="2999" max="55000"  onChange={(e) => console.log(e.target.value)} />
+          <label htmlFor="pricerange">Price</label>
+          <input id = "pricerange" type="range" min= "2999" max= "55000" value = {priceRange}  onChange= {handlePriceRange} />
         </div>
         <div className="filter_category">
           <h4>Category</h4>
@@ -57,39 +101,34 @@ const Products = () => {
         <div className="filter_ratings">
           <h4>Rating</h4>
           <div className="filter_inputs">
-          <input type="radio" id="html" name="fav_language" value="HTML" />
-          <label for="html">4 Star & above </label>
+          <input type="radio" id="ratings" value = {"4star"}  checked = {ratingOption === "4star"} onChange={(e) => setRatingOption(e.target.value)} />
+          <label htmlFor="ratings">4 Star & above </label>
           </div>
           <div className="filter_inputs">
-          <input type="radio" id="css" name="fav_language" value="CSS" />
-          <label for="css">3 Star & above</label>
+          <input type="radio" id="ratings" value = {"3star"}  checked = {ratingOption === "3star"} onChange={(e) => setRatingOption(e.target.value)} />
+          <label htmlFor="ratings">3 Star & above</label>
           </div>
          <div className="filter_inputs">
          <input
             type="radio"
-            id="javascript"
-            name="fav_language"
-            value="JavaScript"
+            id="ratings"
+            value = {"2star"}  checked = {ratingOption === "2star"} onChange={(e) => setRatingOption(e.target.value)}
           />
-          <label for="javascript">2 Star & above</label>
+          <label htmlFor="ratings">2 Star & above</label>
          </div>
           <div className="filter_inputs">
-          <input type="radio" id="javascript" name="fav_language" value="PHP" />
-          <label for="javascript">1 Start & above</label>
+          <input type="radio" id="ratings"  value = {"1star"}  checked = {ratingOption === "1star"} onChange={(e) => setRatingOption(e.target.value)}/>
+          <label htmlFor="ratings">1 Start & above</label>
           </div>
         </div>
         <div className="filter_sort">
           <h4>Sort By</h4>
           <div className="filter_inputs">
-          <input
-            type="radio"
-            id="lowHigh"
-            value = "option1" checked = { selectedOption === "option1"} onChange={(e) => setSelectedOption(e.target.value)}
-          />
+          <input type="radio" id="lowHigh" value = {"option1"} checked = {selectOption === "option1"} onChange={(e) => setSelectOption(e.target.value)}/>
           <label htmlFor="lowHigh">Price - Low to High</label>
           </div>
           <div className="filter_inputs">
-          <input type="radio" id="HighLow"  value = "option2" checked = { selectedOption === "option2"} onChange={(e) => setSelectedOption(e.target.value)}/>
+          <input type="radio" id="HighLow" value = {"option2"}  checked = {selectOption === "option2"}   onChange={(e) => setSelectOption(e.target.value)} />
           <label htmlFor="HighLow">Price - High to low</label>
           </div>
         </div>

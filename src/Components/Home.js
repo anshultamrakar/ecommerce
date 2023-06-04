@@ -4,24 +4,20 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
 import { useEffect  , useState} from "react";
-import axios from "axios";
-import Products from "./Products";
+
 
 const Home = () => {
-const {categories , products , setProducts} = useContext(DataContext)
+const {categories , products , setProducts , isLoading} = useContext(DataContext)
 
-  // useEffect(() => {
-  //   document.body.scrollTop = document.documentElement.scrollTop = 0;
-  // }, [])
+  useEffect(() => {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }, [])
 
 
- 
-    const handleCategoryFilter = (name) => {
-      const filterResult = products.filter(item => item.categoryName === name)
-      setProducts(filterResult)
-     }
- 
- 
+ const handleCategoryFilter = (name) => {
+   const filterCategory = products.filter(item => item.categoryName === name)
+   setProducts(filterCategory)
+  }
 
   return (
     <div className="Home">

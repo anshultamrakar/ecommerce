@@ -4,6 +4,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 export const DataContext = createContext();
 
+
 const DataProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,8 +12,9 @@ const DataProvider = ({ children }) => {
   const [wishItems, setWishItems] = useState([]);
   const [categories, setCategories] = useState([]);
   const [search , setSearch] = useState("")
+  const [searchResult , setSearchResult] = useState([])
   const [checkboxFilter , setCheckBoxFilter] = useState([])
-  const [selectedOption, setSelectedOption] = useState("option1")
+ const [originalProductData , setOriginalProductData] = useState([])
   const [auth, setAuth] = useState({});
 
   const getAllCategory = async () => {
@@ -31,6 +33,7 @@ const DataProvider = ({ children }) => {
       const response = await axios.get("/api/products");
       if (response.status === 200) {
         setProducts(response?.data?.products);
+        setOriginalProductData(response?.data?.products)
         setIsLoading(false);
       }
     } catch (err) {
@@ -38,7 +41,6 @@ const DataProvider = ({ children }) => {
     }
   };
 
- 
   useEffect(() => {
     getProductData();
     getAllCategory();
@@ -76,7 +78,6 @@ const DataProvider = ({ children }) => {
    setProducts(removedWishList)
   };
 
-
   const handleRemoveCart = (id) => {
     const filterCartItem = cartItems.filter(item => item.id !== id)
     setCartItems(filterCartItem)
@@ -89,11 +90,13 @@ const DataProvider = ({ children }) => {
       value={{
         products,
         isLoading,
+        originalProductData,
         search,
         setSearch,
+        searchResult, 
+        setSearchResult,
         handleAddToCart,
         checkboxFilter , setCheckBoxFilter,
-        setSelectedOption,
         categories,
         handleWishList,
         handleWishList,
