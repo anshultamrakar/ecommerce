@@ -6,7 +6,9 @@ import { DataContext } from "../Context/DataContext";
 import { useEffect  , useState} from "react";
 
 
+
 const Home = () => {
+
 const {categories , products , setProducts } = useContext(DataContext)
 
   useEffect(() => {
@@ -51,6 +53,7 @@ const {categories , products , setProducts } = useContext(DataContext)
       <div className="category_container">
         <h1>Shop By Category</h1>
         <hr/>
+    
         <ul className="category">
           {categories.map(category => (
           <li className="category_list legend" key = {category.id}>
@@ -59,6 +62,8 @@ const {categories , products , setProducts } = useContext(DataContext)
             </li>
           ))}
         </ul>
+   
+       
       </div>
     </div>
   );

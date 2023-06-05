@@ -2,16 +2,12 @@ import React from "react";
 import { useEffect , useState } from "react";
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
+import PriceDetails from "./PriceDetails";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems  , handleRemoveCart , setCartItems , handleWishList} = useContext(DataContext);
-   const [itemPrice , setItemPrice] = useState(0)
-
-   const calculateTotalPrice  = () => {
-    const totalprice = cartItems.reduce((acc , value ) => acc + Number(value.price) * value.quantity , 0)
-    setItemPrice(totalprice)
-   }
-
+  const { cartItems  , handleRemoveCart , setCartItems , handleWishList, calculateTotalPrice} = useContext(DataContext);
+ 
   const handleIncrement = (id) => {
    const incrementQty = [...cartItems].map(item => item.id === id ? {...item , quantity : item.quantity + 1} : item)
    setCartItems(incrementQty)
@@ -58,30 +54,7 @@ const Cart = () => {
         )}
       </div>
       {cartItems.length > 0 ?
-        <div className="price_details">
-        <h2>Price details</h2>
-        <hr />
-        <div className="price_details_list">
-          <p>Price</p>
-          <p> ₹ {itemPrice}</p>
-        </div>
-        <div className="price_details_list">
-          <p>Discount</p>
-          <p>₹ -1000</p>
-        </div>
-        <div className="price_details_list">
-          <p>Delivery Charges</p>
-          <p> ₹ 499</p>
-        </div>
-        <hr />
-        <div className="price_details_list">
-          <h3>Total Amount</h3>
-          <p>₹ {itemPrice - 501}</p >
-        </div>
-        <hr/>
-        <p style = {{fontWeight : "bold"}}>You will save ₹ 1000 on this order</p>
-        <button className="price_details_list_btn">Checkout</button>
-      </div> : ""}
+        <PriceDetails/> : ""}
     </div>
   );
 };

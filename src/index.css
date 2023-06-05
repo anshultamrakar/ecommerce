@@ -639,3 +639,30 @@ textarea {
 }
 
 
+/* checkout page */
+
+
+.checkout{
+  min-height: 100vh;
+  margin-top: 200px;
+  text-align: center;
+}
+
+
+/* account page */
+.account{
+  min-height: 100vh;
+  margin-top: 200px;
+  text-align: center;
+}
+
+.active{
+  background-color: #38bdf8;
+  font-size: 1.5rem;
+  padding: 0.8rem;
+}
+.account_tabs{
+  width: 400px;
+  height: 300px;
+  border: 2px solid gray;
+}

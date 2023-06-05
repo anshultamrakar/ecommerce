@@ -10,6 +10,7 @@ import Login from './auth/Login';
 import Missing from './Components/Missing';
 import Register from './auth/Register';
 import Checkout from "./Components/Checkout"
+import UserProfile from './Components/UserProfile';
 import Mockman from "mockman-js";
 import DataProvider from './Context/DataContext';
 import ProductDetails from './Components/ProductDetails';
@@ -28,6 +29,7 @@ function App() {
       <Route path = "/product/:productId" element = {<ProductDetails/>}/>
       <Route path = "/register" element = {<Register/>}/>
       <Route path = "/checkout" element = {<Checkout/>}/>
+      <Route path = "/user_profile" element = {<UserProfile/>}/>
       <Route path = "/login" element = {<Login/>}/>
       <Route path = "/mockman" element = {<Mockman/>}/>
       <Route path = "*" element = {<Missing/>}/>

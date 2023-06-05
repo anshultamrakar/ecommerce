@@ -12,6 +12,7 @@ const DataProvider = ({ children }) => {
   const [wishItems, setWishItems] = useState([]);
   const [categories, setCategories] = useState([]);
   const [search , setSearch] = useState("")
+  const [itemPrice , setItemPrice] = useState(0)
   const [searchResult , setSearchResult] = useState([])
   const [checkboxFilter , setCheckBoxFilter] = useState([])
   const [originalProductData , setOriginalProductData] = useState([])
@@ -45,6 +46,14 @@ const DataProvider = ({ children }) => {
     getProductData();
     getAllCategory();
   }, []);
+
+
+
+
+  const calculateTotalPrice  = () => {
+   const totalprice = cartItems.reduce((acc , value ) => acc + Number(value.price) * value.quantity , 0)
+   setItemPrice(totalprice)
+  }
 
 
   const handleAddToCart = (id) => {
@@ -92,6 +101,7 @@ const DataProvider = ({ children }) => {
         products,
         isLoading,
         search,
+        itemPrice , setItemPrice, calculateTotalPrice, 
         setSearch,
         searchResult, 
         setSearchResult,
