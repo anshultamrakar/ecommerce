@@ -14,9 +14,24 @@ const DataProvider = ({ children }) => {
   const [search , setSearch] = useState("")
   const [itemPrice , setItemPrice] = useState(0)
   const [searchResult , setSearchResult] = useState([])
+  const [filterCategoryName , setFilterCategoryName] = useState("")
   const [checkboxFilter , setCheckBoxFilter] = useState([])
   const [originalProductData , setOriginalProductData] = useState([])
   const [auth, setAuth] = useState({});
+
+
+  useEffect(() => {
+    getProductData();
+    getAllCategory();
+  }, []);
+
+
+   
+  useEffect(() => {
+    const filteredResults = originalProductData.filter(item => (item.title).toLowerCase().includes(search.toLowerCase()))
+    setProducts(filteredResults)
+  },[search , originalProductData])
+
 
   const getAllCategory = async () => {
     try {
@@ -42,12 +57,11 @@ const DataProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    getProductData();
-    getAllCategory();
-  }, []);
 
-
+  const handleCategoryFilter = (name) => {
+   const filterResult = originalProductData.filter(item => item.categoryName === name)
+   setProducts(filterResult)
+  }
 
 
   const calculateTotalPrice  = () => {
@@ -110,6 +124,7 @@ const DataProvider = ({ children }) => {
         getProductData,
         checkboxFilter , setCheckBoxFilter,
         categories,
+        handleCategoryFilter,
         handleWishList,
         handleWishList,
         setProducts,

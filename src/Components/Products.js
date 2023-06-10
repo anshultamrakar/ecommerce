@@ -19,7 +19,6 @@ const Products = () => {
 
 useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    getProductData()
 },[])
 
 
