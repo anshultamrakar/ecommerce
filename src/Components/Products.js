@@ -8,13 +8,13 @@ import { DataContext } from "../Context/DataContext";
 
 const categoryInput = ['Sofas' , "Bed" ,  "Tables" , "Chairs" , "Wardrobe" , "Dinning Table"]
 const ratingInput = ["4star" , "3star", "2star", "1star"]
+const sortingInput = ["option1" , "option2"]
 
 const Products = () => {
   const {products , setProducts , handleAddToCart , handleWishList , checkboxFilter , setCheckBoxFilter , search , originalProductData , getProductData  } = useContext(DataContext)
-  const [priceRange , setPriceRange] = useState("2600")
-  const [filteredRating , setFilterRating] = useState(products)
   const [sortOption , setSortOption] = useState("option1")
-  const [ratingOption , setRatingOption] = useState("4star")
+  const [priceVal , setPriceVal] = useState("")
+  const [ratingOption , setRatingOption] = useState("")
 
 
 useEffect(() => {
@@ -26,27 +26,30 @@ const handleClear = () => {
  console.log("hello")
 }
 
-
-const onInputChange = (e) => {
- setPriceRange(e.target.value)
- const resultFilter = originalProductData.filter(item => item.price === priceRange)
- setProducts(resultFilter)
+const handleRangeInput = (e) => {
+setPriceVal(e.target.value)
+const filteredProducts = originalProductData.filter((product) =>  originalProductData.price >= parseInt("2600", 10) && product.price <= parseInt("55000", 10));
+setProducts(filteredProducts)
 }
 
+
 const handleSorting = (e) => {
- setSortOption(e.target.value)
- if(sortOption === "option1"){
-  setProducts([...products].sort((a,b) => b.price -a.price))
- }
- if(sortOption === "option2"){
-  setProducts([...products].sort((a,b) => a.price -b.price))
- }
+setSortOption(e.target.value)
+console.log(sortOption)
+if(sortOption === "option2"){
+  setProducts(originalProductData.sort((a,b) => a.price - b.price))
+}
+if(sortOption === "option1"){
+  setProducts(originalProductData.sort((a,b) => b.price - a.price))
+}
+
 }
 
 const handleRatingInput = (e) => {
- setRatingOption(e.target.value)
- const filterResult = originalProductData.filter(item => item.rating === ratingOption)
- setProducts(filterResult)
+  const value = e.target.value
+  setRatingOption(e.target.value)
+  const filterResult = originalProductData.filter(item => item.rating === value)
+  setProducts(filterResult)
 }
 
  const handleCheckInput = (e) => {
@@ -71,7 +74,7 @@ const handleRatingInput = (e) => {
         </div>
         <div className="filter_price">
           <label htmlFor="pricerange">Price </label>
-          <input id = "pricerange" type="range" defaultValue={2600} min = "2600" max = "55000"value = {priceRange} onChange={onInputChange}/>
+          <input id = "pricerange" type="range" min = "2600" max = "55000" defaultValue={"0"} value = {priceVal} step = "10" onChange={handleRangeInput}/>
         </div>
         <div className="filter_category">
           <h4>Category</h4>
@@ -86,7 +89,7 @@ const handleRatingInput = (e) => {
         <div className="filter_ratings">
           <h4>Rating</h4>
           {ratingInput.map(item => (
-            <div className="filter_inputs">
+            <div key = {item} className="filter_inputs">
             <input type="radio" id= {item}  value = {item}  checked = {ratingOption === item} onChange={handleRatingInput} />
             <label htmlFor= {item}>{item} & above </label>
             </div>
@@ -94,14 +97,12 @@ const handleRatingInput = (e) => {
         </div>
         <div className="filter_sort">
           <h4>Sort By</h4>
+          {sortingInput.map(item => (
             <div className="filter_inputs">
-              <input type="radio" id= "sortprice" value = {"option1"} checked = {sortOption === "option1"}  onChange={handleSorting}/>
-              <label htmlFor= "sortprice"> Price - Low to High</label>
+             <input type="radio" id= {item} value = {item} checked = {sortOption === item}  onChange={handleSorting}/>
+              <label htmlFor= {item}> Price - {item === "option1" ? "Low to High" : "High to Low"}</label>
             </div>
-            <div className="filter_inputs">
-              <input type="radio" id= "sortprice" value={"option2"}  checked = {sortOption === "option2"}  onChange={handleSorting}/>
-              <label htmlFor= "sortprice">Price - High To Low </label>
-            </div>
+          ))}
         </div>
       </aside>
       <div className="product_listItems">
