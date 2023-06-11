@@ -10,6 +10,7 @@ import Login from './auth/Login';
 import Missing from './Components/Missing';
 import Register from './auth/Register';
 import Checkout from "./Components/Checkout"
+import { ToastContainer } from "react-toastify"
 import UserProfile from './Components/UserProfile';
 import Mockman from "mockman-js";
 import DataProvider from './Context/DataContext';
@@ -34,6 +35,7 @@ function App() {
       <Route path = "/mockman" element = {<Mockman/>}/>
       <Route path = "*" element = {<Missing/>}/>
      </Routes>
+     <ToastContainer/>
      </DataProvider>
      <Footer/>
     </div>

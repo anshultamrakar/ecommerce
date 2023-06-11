@@ -71,24 +71,16 @@ const DataProvider = ({ children }) => {
 
 
   const handleAddToCart = (id) => {
-    const cartProduct = products.map((item) =>
-      item.id === id ? { ...item, isAddedToCart: !item.isAddedToCart } : item
-    );
+    const cartProduct = products.map((item) => item.id === id ? { ...item, isAddedToCart: !item.isAddedToCart } : item);
     setProducts(cartProduct);
-    const filterCart = cartProduct.filter(
-      (item) => item.isAddedToCart === true
-    );
+    const filterCart = cartProduct.filter((item) => item.isAddedToCart === true);
     setCartItems(filterCart);
   };
 
 
   const handleWishList = (id) => {
-    const wishProduct = products.map((item) =>
-      item.id === id  ? { ...item, isAddedToWish: !item.isAddedToWish } : item
-    );
-    const filterWish = wishProduct.filter(
-      (item) => item.isAddedToWish === true
-    );
+    const wishProduct = products.map((item) => item.id === id  ? { ...item, isAddedToWish: !item.isAddedToWish } : item);
+    const filterWish = wishProduct.filter((item) => item.isAddedToWish === true);
     setWishItems(filterWish);
     setProducts(wishProduct);
   };

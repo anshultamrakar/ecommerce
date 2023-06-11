@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
+import { toast } from "react-toastify";
 
 const categoryInput = ['Sofas' , "Bed" ,  "Tables" , "Chairs" , "Wardrobe" , "Dinning Table"]
 const ratingInput = ["4star" , "3star", "2star", "1star"]
@@ -27,9 +27,7 @@ const handleClear = () => {
 }
 
 const handleRangeInput = (e) => {
-setPriceVal(e.target.value)
-const filteredProducts = originalProductData.filter((product) =>  originalProductData.price >= parseInt("2600", 10) && product.price <= parseInt("55000", 10));
-setProducts(filteredProducts)
+console.log("hello")
 }
 
 
@@ -42,7 +40,6 @@ if(sortOption === "option2"){
 if(sortOption === "option1"){
   setProducts(originalProductData.sort((a,b) => b.price - a.price))
 }
-
 }
 
 const handleRatingInput = (e) => {
@@ -74,7 +71,7 @@ const handleRatingInput = (e) => {
         </div>
         <div className="filter_price">
           <label htmlFor="pricerange">Price </label>
-          <input id = "pricerange" type="range" min = "2600" max = "55000" defaultValue={"0"} value = {priceVal} step = "10" onChange={handleRangeInput}/>
+          <input id = "pricerange" type="range"  onChange={handleRangeInput}/>
         </div>
         <div className="filter_category">
           <h4>Category</h4>
