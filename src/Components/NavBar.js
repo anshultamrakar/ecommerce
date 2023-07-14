@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  AiOutlineHeart,
-  AiOutlineShoppingCart,
-  AiOutlineUser,
-} from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineShoppingCart, AiOutlineUser} from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 

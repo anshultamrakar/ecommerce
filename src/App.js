@@ -14,30 +14,34 @@ import { ToastContainer } from "react-toastify"
 import UserProfile from './Components/UserProfile';
 import Mockman from "mockman-js";
 import DataProvider from './Context/DataContext';
+import AuthProvider from './Context/AuthContext';
 import ProductDetails from './Components/ProductDetails';
+import Layout from './Components/Layout';
 
 function App() {
   return (
     <div>
      <DataProvider>
-     <Header/>
-     <Routes>
-      <Route path = "/" element = {<Home/>}/>
-      <Route path = "/wishlist" element = {<WishList/>}/>
-      <Route path = "/cart" element = {<Cart/>}/>
-      <Route path = "/product" element = {<Products/>}/>
-      <Route path = "/categories/:categoryId" element = {<Products/>}/>
-      <Route path = "/product/:productId" element = {<ProductDetails/>}/>
-      <Route path = "/register" element = {<Register/>}/>
-      <Route path = "/checkout" element = {<Checkout/>}/>
-      <Route path = "/user_profile" element = {<UserProfile/>}/>
-      <Route path = "/login" element = {<Login/>}/>
-      <Route path = "/mockman" element = {<Mockman/>}/>
-      <Route path = "*" element = {<Missing/>}/>
-     </Routes>
-     <ToastContainer/>
+      <AuthProvider>
+        <Routes>
+        <Route path = "/" element = {<Layout/>}>
+        <Route path = "/" element = {<Home/>}/>
+        <Route path = "/wishlist" element = {<WishList/>}/>
+        <Route path = "/cart" element = {<Cart/>}/>
+        <Route path = "/product" element = {<Products/>}/>
+        <Route path = "/categories/:categoryId" element = {<Products/>}/>
+        <Route path = "/product/:productId" element = {<ProductDetails/>}/>
+        <Route path = "/register" element = {<Register/>}/>
+        <Route path = "/checkout" element = {<Checkout/>}/>
+        <Route path = "/user_profile" element = {<UserProfile/>}/>
+        <Route path = "/login" element = {<Login/>}/>
+        <Route path = "/mockman" element = {<Mockman/>}/>
+        <Route path = "*" element = {<Missing/>}/>
+        </Route>
+      </Routes>
+      <ToastContainer/>
+      </AuthProvider>
      </DataProvider>
-     <Footer/>
     </div>
   );
 }

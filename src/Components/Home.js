@@ -25,7 +25,6 @@ const {categories , products , setProducts , handleCategoryFilter} = useContext(
         <h1>Our Craft , Your Comfort!</h1>
         <Link to = "/product"><button>Shop Now</button> </Link>
       </div>
-      
       <div className="explore_collection">
        <div>
         <h1>Explore Our Collections</h1>
@@ -48,11 +47,10 @@ const {categories , products , setProducts , handleCategoryFilter} = useContext(
       <div className="category_container">
         <h1>Shop By Category</h1>
         <hr/>
-    
         <ul className="category">
           {categories.map(category => (
           <li className="category_list legend" key = {category.id}>
-              <Link to = "/product"><img onClick={() => handleCategoryFilter(category.categoryName)} src = {category.imgUrl}/></Link> 
+              <Link to = "/product"><img onClick={() => handleCategoryFilter(category?.categoryName)} src = {category.imgUrl}/></Link> 
               <h4>{category.categoryName}</h4>
             </li>
           ))}

@@ -323,6 +323,7 @@ button{
   height: 18px;
 }
 
+
 .like-wishlist {
   position: absolute;
   top: 0px;
@@ -517,7 +518,6 @@ section {
 
 .Register a {
   color: #fff;
-
 }
 
 .Register input[type="text"],

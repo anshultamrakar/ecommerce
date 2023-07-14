@@ -2,10 +2,11 @@ import { createContext } from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
+
 export const DataContext = createContext();
 
-
 const DataProvider = ({ children }) => {
+  
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
@@ -26,7 +27,6 @@ const DataProvider = ({ children }) => {
   }, []);
 
 
-   
   useEffect(() => {
     const filteredResults = originalProductData.filter(item => (item.title).toLowerCase().includes(search.toLowerCase()))
     setProducts(filteredResults)
@@ -57,10 +57,8 @@ const DataProvider = ({ children }) => {
     }
   };
 
-
   const handleCategoryFilter = (name) => {
-   const filterResult = originalProductData.filter(item => item.categoryName === name)
-   setProducts(filterResult)
+   console.log("dsds")
   }
 
 

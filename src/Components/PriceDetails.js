@@ -4,7 +4,7 @@ import { DataContext } from '../Context/DataContext'
 import {Link} from "react-router-dom"
 
 const PriceDetails = () => {
-    const {itemPrice } = useContext(DataContext)
+    const {itemPrice} = useContext(DataContext)
   return (
     <div className="price_details">
         <h2>Price details</h2>

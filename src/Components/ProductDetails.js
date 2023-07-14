@@ -9,7 +9,6 @@ const ProductDetails = () => {
   let {productId} = useParams();
   const {  handleAddToCart , handleWishList } = useContext(DataContext);
   const [productDetailsItem ,setProductDetailsItems] = useState({})
-  const [productQty , setProductQty] = useState(1)
 
   const getProductDetails = async() => {
     try{
@@ -25,7 +24,6 @@ const ProductDetails = () => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     getProductDetails()
   },[])
-
 
   return (
     <div className="productDetails">
@@ -44,7 +42,6 @@ const ProductDetails = () => {
             </button>
             </div>
             <br/>
-          
           </div>
         </div>
       </div> 

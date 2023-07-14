@@ -4,104 +4,26 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
+import FilterInput from "./FilterInput";
 import { toast } from "react-toastify";
 
-const categoryInput = ['Sofas' , "Bed" ,  "Tables" , "Chairs" , "Wardrobe" , "Dinning Table"]
-const ratingInput = ["4star" , "3star", "2star", "1star"]
-const sortingInput = ["option1" , "option2"]
+
+
 
 const Products = () => {
-  const {products , setProducts , handleAddToCart , handleWishList , checkboxFilter , setCheckBoxFilter , search , originalProductData , getProductData  } = useContext(DataContext)
-  const [sortOption , setSortOption] = useState("option1")
-  const [priceVal , setPriceVal] = useState("")
-  const [ratingOption , setRatingOption] = useState("")
-
-
+  const {products  , handleAddToCart , handleWishList , checkboxFilter } = useContext(DataContext)
+  
 useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
 },[])
 
 
-const handleClear = () => {
- console.log("hello")
-}
 
-const handleRangeInput = (e) => {
-console.log("hello")
-}
-
-
-const handleSorting = (e) => {
-setSortOption(e.target.value)
-console.log(sortOption)
-if(sortOption === "option2"){
-  setProducts(originalProductData.sort((a,b) => a.price - b.price))
-}
-if(sortOption === "option1"){
-  setProducts(originalProductData.sort((a,b) => b.price - a.price))
-}
-}
-
-const handleRatingInput = (e) => {
-  const value = e.target.value
-  setRatingOption(e.target.value)
-  const filterResult = originalProductData.filter(item => item.rating === value)
-  setProducts(filterResult)
-}
-
- const handleCheckInput = (e) => {
-  const {checked , value} = e.target
-   if(checked){
-    setCheckBoxFilter([...checkboxFilter , value])
-   }else{
-    const filterByCategory = checkboxFilter.filter(item => item !== value)
-    setCheckBoxFilter(filterByCategory)
-   }
-  }
-
- 
  const filteredProducts =  checkboxFilter.length > 0 ?  products.filter(item => checkboxFilter.includes(item.categoryName)) : products
 
   return (
     <div className="Product_list">
-      <aside>
-        <div className="filter_heading">
-          <h2>Filters</h2>
-          <h4 onClick = {handleClear} style = {{textDecoration : "underline"}}>Clear</h4>
-        </div>
-        <div className="filter_price">
-          <label htmlFor="pricerange">Price </label>
-          <input id = "pricerange" type="range"  onChange={handleRangeInput}/>
-        </div>
-        <div className="filter_category">
-          <h4>Category</h4>
-          {categoryInput.map(item => (
-              <div className="filter_inputs">
-              <input type="checkbox" id= {item}  value = {item}  onChange={handleCheckInput}  />
-              <label htmlFor= {item}>{item}</label>
-              </div>
-            ))
-          }
-        </div>
-        <div className="filter_ratings">
-          <h4>Rating</h4>
-          {ratingInput.map(item => (
-            <div key = {item} className="filter_inputs">
-            <input type="radio" id= {item}  value = {item}  checked = {ratingOption === item} onChange={handleRatingInput} />
-            <label htmlFor= {item}>{item} & above </label>
-            </div>
-          ))}
-        </div>
-        <div className="filter_sort">
-          <h4>Sort By</h4>
-          {sortingInput.map(item => (
-            <div className="filter_inputs">
-             <input type="radio" id= {item} value = {item} checked = {sortOption === item}  onChange={handleSorting}/>
-              <label htmlFor= {item}> Price - {item === "option1" ? "Low to High" : "High to Low"}</label>
-            </div>
-          ))}
-        </div>
-      </aside>
+      <FilterInput/>
       <div className="product_listItems">
         <h2>
           Showing All Products
@@ -118,7 +40,7 @@ const handleRatingInput = (e) => {
               </button>
               <div className="like-wishlist">
                 <div onClick={() => handleWishList(product.id)} className="wishlist-button">
-                {!product.isAddedToWish ? <AiOutlineHeart /> : <AiFillHeart/> }
+                {!product.isAddedToWish ? <AiOutlineHeart /> : <AiFillHeart color = "red"/> }
               </div>
               </div>
             </li>
