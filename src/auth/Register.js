@@ -2,11 +2,7 @@ import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {
-  faCheck,
-  faTimes,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import {faCheck,faTimes,faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const USER_REGEX =/^[A-z][A-z0-9-_]{3,23}$/;
@@ -30,7 +26,7 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
 
 
-
+  
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }, []);
@@ -47,9 +43,11 @@ const Register = () => {
     setValidMatch(pwd === matchPwd);
   }, [pwd, matchPwd]);
 
+
   useEffect(() => {
     setErrMsg("");
   }, [user, pwd, matchPwd]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,8 +68,7 @@ const Register = () => {
             "Content-Type": "application/json" }
         }
       );
-      console.log(response?.data);
-      localStorage.setItem("token", response.data.encodedToken);
+      localStorage.setItem("token", response?.data?.encodedToken);
       setSuccess(true)
       setUser("");
       setPwd("");

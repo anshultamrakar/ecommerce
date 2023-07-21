@@ -8,8 +8,8 @@ import { useEffect  , useState} from "react";
 
 
 const Home = () => {
-
 const {categories , products , setProducts , handleCategoryFilter} = useContext(DataContext)
+
 
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;

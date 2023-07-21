@@ -8,8 +8,6 @@ import FilterInput from "./FilterInput";
 import { toast } from "react-toastify";
 
 
-
-
 const Products = () => {
   const {products  , handleAddToCart , handleWishList , checkboxFilter } = useContext(DataContext)
   
@@ -35,11 +33,11 @@ useEffect(() => {
              <Link to = {`${product._id}`}><img src={product.img} /></Link> 
               <h4>{product.title}</h4>
               <p> ₹ {product.price}</p>
-              <button disabled = {product.isAddedToCart ? true :false} onClick={() => handleAddToCart(product.id)}>
+              <button disabled = {product.isAddedToCart ? true :false} onClick={() => handleAddToCart(product)}>
                 {!product.isAddedToCart ? "Add to cart"  : <Link style = {{textDecoration : "none" , color : "#fff"}} to = "/cart">Go to cart</Link> }
               </button>
               <div className="like-wishlist">
-                <div onClick={() => handleWishList(product.id)} className="wishlist-button">
+                <div onClick={() => handleWishList(product)} className="wishlist-button">
                 {!product.isAddedToWish ? <AiOutlineHeart /> : <AiFillHeart color = "red"/> }
               </div>
               </div>

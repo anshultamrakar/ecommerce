@@ -1,6 +1,4 @@
 import React from 'react'
-import Header from './Components/Header';
-import Footer from './Components/Footer';
 import Home from './Components/Home';
 import {Routes , Route} from "react-router-dom"
 import WishList from './Components/WishList';
@@ -12,27 +10,33 @@ import Register from './auth/Register';
 import Checkout from "./Components/Checkout"
 import { ToastContainer } from "react-toastify"
 import UserProfile from './Components/UserProfile';
+import RequireAuth from './Components/RequireAuth';
 import Mockman from "mockman-js";
 import DataProvider from './Context/DataContext';
 import AuthProvider from './Context/AuthContext';
 import ProductDetails from './Components/ProductDetails';
 import Layout from './Components/Layout';
 
+
 function App() {
+
+ 
+
   return (
-    <div>
+    <div >
      <DataProvider>
       <AuthProvider>
         <Routes>
         <Route path = "/" element = {<Layout/>}>
         <Route path = "/" element = {<Home/>}/>
+        <Route  element = {<RequireAuth/>}>
+        <Route path = "/checkout" element = {<Checkout/>}/>
+        </Route>
         <Route path = "/wishlist" element = {<WishList/>}/>
         <Route path = "/cart" element = {<Cart/>}/>
         <Route path = "/product" element = {<Products/>}/>
-        <Route path = "/categories/:categoryId" element = {<Products/>}/>
         <Route path = "/product/:productId" element = {<ProductDetails/>}/>
         <Route path = "/register" element = {<Register/>}/>
-        <Route path = "/checkout" element = {<Checkout/>}/>
         <Route path = "/user_profile" element = {<UserProfile/>}/>
         <Route path = "/login" element = {<Login/>}/>
         <Route path = "/mockman" element = {<Mockman/>}/>

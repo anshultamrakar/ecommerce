@@ -1,11 +1,15 @@
 import React from 'react'
-import { useContext , useEffect } from 'react'
+import axios from 'axios';
+import { useContext , useEffect  , useState } from 'react'
 import { DataContext } from '../Context/DataContext'
 import { AiOutlineHeart, AiFillHeart ,AiFillDelete } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
+
 const WishList = () => {
-  const {wishItems , handleRemoveWishlist , handleAddToCart}  = useContext(DataContext)
+  const {wishItems , handleRemoveWishlist , handleAddToCart  , getWishListItem}  = useContext(DataContext)
+
+console.log(wishItems)
   return (
     <div className='wishlist'>
       <h2>My WishList</h2>
@@ -22,7 +26,7 @@ const WishList = () => {
                 {!item.isAddedToWish ? "Go to cart" : "Move to Cart" }
               </button>
               <div  className="like-wishlist">
-                <div onClick={() => handleRemoveWishlist(item.id)} className="wishlist-button">
+                <div onClick={() => handleRemoveWishlist(item._id)} className="wishlist-button">
                  <AiFillDelete /> 
               </div>
               </div>

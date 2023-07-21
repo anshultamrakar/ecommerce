@@ -1,25 +1,28 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useEffect , useState } from "react";
+import { Link , useNavigate , useLocation  } from "react-router-dom";
 import axios from "axios"
-import { DataContext } from "../Context/DataContext";
+import useAuth from "../hook/useAuth";
+
+
 
 const Login = () => {
-  const {setAuth} = useContext(DataContext)
-  const userRef = useRef();
-  const errRef = useRef();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  
+
+  const {setAuth} = useAuth()
 
   const [user, setUser] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [pwd, setPwd] = useState("");
-  const [success, setSuccess] = useState(false);
+  
 
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-    userRef.current.focus()
   }, [])
-
 
   useEffect(() => {
     setErrMsg("");
@@ -27,7 +30,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccess(true)
     try{
       const response = await axios.post("/api/auth/login" , 
       {
@@ -41,10 +43,12 @@ const Login = () => {
           "Content-Type": "application/json" }
       })
       const accessToken = response?.data?.encodedToken
-      setAuth({ user, pwd,  accessToken });
+      localStorage.setItem("token" , accessToken)
+      console.log(accessToken)
+      setAuth({ user, pwd, accessToken });
       setUser('');
       setPwd('');
-      setSuccess(true)
+      navigate(from , {replace :true})
     }catch(err){
       if (!err?.response) {
         setErrMsg('No Server Response');
@@ -55,23 +59,19 @@ const Login = () => {
     } else {
         setErrMsg('Login Failed');
     }
-      errRef.current.focus();
     }
   };
 
+
+   const handleGuestLogin = () => {
+    setUser("Anshul")
+    setPwd("anshul@123#")
+   }
+
   return (
     <div className="Login">
-      {success ? (
-        <div className="login_section">
-          <h1>You are logged in!</h1>
-          <br />
-          <p>
-            <Link to = "/">Go to Home</Link>
-          </p>
-        </div>
-      ) : (
         <div  className="login_section">
-        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+        <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">Username : </label>
@@ -80,7 +80,7 @@ const Login = () => {
               type="text"
               autoComplete="off"
               value={user}
-              ref={userRef}
+              autoFocus
               onChange={(e) => setUser(e.target.value)}
               required
             />
@@ -93,6 +93,7 @@ const Login = () => {
               required
             />
             <button type="submit">Login</button>
+            <button onClick={handleGuestLogin}>Guest Login</button>
           </form>
           <p>
             Need an Account?
@@ -102,7 +103,6 @@ const Login = () => {
             </span>
           </p>
         </div>
-      )}
     </div>
   );
 };

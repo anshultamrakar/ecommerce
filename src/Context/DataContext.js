@@ -2,6 +2,7 @@ import { createContext } from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export const DataContext = createContext();
 
@@ -15,22 +16,20 @@ const DataProvider = ({ children }) => {
   const [search , setSearch] = useState("")
   const [itemPrice , setItemPrice] = useState(0)
   const [searchResult , setSearchResult] = useState([])
-  const [filterCategoryName , setFilterCategoryName] = useState("")
   const [checkboxFilter , setCheckBoxFilter] = useState([])
   const [originalProductData , setOriginalProductData] = useState([])
-  const [auth, setAuth] = useState({});
-
-
+  
   useEffect(() => {
     getProductData();
     getAllCategory();
   }, []);
-
+    
 
   useEffect(() => {
     const filteredResults = originalProductData.filter(item => (item.title).toLowerCase().includes(search.toLowerCase()))
     setProducts(filteredResults)
   },[search , originalProductData])
+
 
 
   const getAllCategory = async () => {
@@ -57,8 +56,10 @@ const DataProvider = ({ children }) => {
     }
   };
 
+
   const handleCategoryFilter = (name) => {
-   console.log("dsds")
+   const filterResult = originalProductData.filter(item => item.categoryName === name)
+   setOriginalProductData(filterResult)
   }
 
 
@@ -68,36 +69,99 @@ const DataProvider = ({ children }) => {
   }
 
 
-  const handleAddToCart = (id) => {
-    const cartProduct = products.map((item) => item.id === id ? { ...item, isAddedToCart: !item.isAddedToCart } : item);
-    setProducts(cartProduct);
-    const filterCart = cartProduct.filter((item) => item.isAddedToCart === true);
-    setCartItems(filterCart);
+  const handleAddToCart = async(product) => {
+    const token = localStorage.getItem("token")
+    try{
+     const response = await axios.post("/api/user/cart" , {product} , {
+       headers : {
+        authorization : token
+       }
+     })
+     if(response?.status === 201){
+      toast.success("Item Added to the cart page")
+      const isAddedToCart = products.map(item => item.id === product.id ? {...item , isAddedToCart: !item.isAddedToCart} : item) 
+      setProducts(isAddedToCart)
+      getCartItems()
+     }
+    }catch(err){
+      console.log(err)
+    }
   };
 
 
-  const handleWishList = (id) => {
-    const wishProduct = products.map((item) => item.id === id  ? { ...item, isAddedToWish: !item.isAddedToWish } : item);
-    const filterWish = wishProduct.filter((item) => item.isAddedToWish === true);
-    setWishItems(filterWish);
-    setProducts(wishProduct);
+  const handleWishList = async(product) => {
+    try{
+       const response = await axios.post("/api/user/wishlist" , { product } , {
+        headers : {
+          authorization : localStorage.getItem("token")
+        }
+      })
+      setWishItems(response?.data?.wishlist)
+      const isAddedInWish = products.map(item => item._id === product._id ? {...item , isAddedToWish : !item.isAddedToWish} : item)
+      setProducts(isAddedInWish)
+      if(wishItems.find(item => item._id === product._id)){
+        toast.success("Item Already added to wish list ")
+      }
+      
+      
+     
+    }catch(err){
+      console.log(err)
+    }
   };
 
 
-  const handleRemoveWishlist = (id) => {
-   const filterWishlist = wishItems.filter(item => item.id !== id)
-   setWishItems(filterWishlist)
-   const removedWishList = products.map(item => item.id === id ? {...item , isAddedToWish : !item.isAddedToWish} : item)
-   setProducts(removedWishList)
+  const getWishListItem = async() => {
+    try{
+      const response = await axios.get("/api/user/wishlist" , {
+        headers : {
+          authorization : localStorage.getItem("token")
+        }
+      })
+      setWishItems(response?.data?.wishlist)
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const getCartItems = async() => {
+    try{
+      const response = await axios.get("/api/user/cart" , {
+         headers : {
+          authorization : localStorage.getItem("token")
+         }
+      })
+     setCartItems(response?.data?.cart)
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const handleRemoveWishlist = async(id) => {
+    try{
+     const response =  await axios.delete(`/api/user/wishlist/${id}` , {
+      headers : {
+        authorization : localStorage.getItem("token")
+      }
+     })
+     setWishItems(response?.data?.wishlist)
+    }catch(err){
+      console.log(err)
+    }
   };
 
-  const handleRemoveCart = (id) => {
-    const filterCartItem = cartItems.filter(item => item.id !== id)
-    setCartItems(filterCartItem)
-    const removedCartList = products.map(item => item.id === id ? {...item , isAddedToCart : !item.isAddedToCart} : item)
-    setProducts(removedCartList)
+  const handleRemoveCart = async(id) => {
+   try{
+    const response = await axios.delete(`/api/user/cart/${id}` , {
+      headers : {
+        authorization : localStorage.getItem("token")
+      }
+    })
+    setCartItems(response?.data?.cart)
+   }catch(err){
+    console.log(err)
    }
-
+   }
 
   return (
     <DataContext.Provider
@@ -110,20 +174,21 @@ const DataProvider = ({ children }) => {
         searchResult, 
         setSearchResult,
         originalProductData,
+        setOriginalProductData,
         handleAddToCart,
         getProductData,
         checkboxFilter , setCheckBoxFilter,
         categories,
         handleCategoryFilter,
+        getWishListItem,
         handleWishList,
         handleWishList,
         setProducts,
         setCategories,
         wishItems,
-        setCartItems,
         handleRemoveCart,
+        getCartItems,
         cartItems,
-        setAuth,
         handleRemoveWishlist,
       }}
     >
