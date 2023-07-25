@@ -5,6 +5,7 @@ import {Link} from "react-router-dom"
 
 const PriceDetails = () => {
     const {itemPrice} = useContext(DataContext)
+    console.log(itemPrice)
   return (
     <div className="price_details">
         <h2>Price details</h2>

@@ -57,6 +57,12 @@ const DataProvider = ({ children }) => {
   };
 
 
+  const calculatePrice = (cartItems) => {
+   const priceItem = cartItems.reduce((acc , value) => acc + Number(value.price) * value.qty ,0)
+   setItemPrice(priceItem)
+  }
+
+
   const handleCategoryFilter = (name) => {
    const filterResult = originalProductData.filter(item => item.categoryName === name)
    setOriginalProductData(filterResult)
@@ -96,7 +102,9 @@ const DataProvider = ({ children }) => {
         }
       })
       setCartItems(response?.data?.cart)
+      calculatePrice(response?.data?.cart)
     }catch(err){
+      
       console.log(err)
     }
   }

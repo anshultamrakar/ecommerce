@@ -3,6 +3,7 @@ import { useEffect , useState } from "react";
 import { Link , useNavigate , useLocation  } from "react-router-dom";
 import axios from "axios"
 import useAuth from "../hook/useAuth";
+import { toast } from "react-toastify";
 
 
 
@@ -44,7 +45,7 @@ const Login = () => {
       })
       const accessToken = response?.data?.encodedToken
       localStorage.setItem("token" , accessToken)
-      console.log(accessToken)
+      toast.success("Login succesfull")
       setAuth({ user, pwd, accessToken });
       setUser('');
       setPwd('');

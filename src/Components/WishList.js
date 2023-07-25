@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 const WishList = () => {
   const {wishItems , handleRemoveWishlist , handleAddToCart  , getWishListItem}  = useContext(DataContext)
 
-console.log(wishItems)
   return (
     <div className='wishlist'>
       <h2>My WishList</h2>
@@ -21,7 +20,7 @@ console.log(wishItems)
              <img src={item.img} />
               <h4>{item.title}</h4>
               <p> ₹ {item.price}</p>
-              <button onClick = {() => handleAddToCart(item.id)}>
+              <button onClick = {() => handleAddToCart(item._id)}>
                {/* {item.isAddedToWish ? <Link style = {{textDecoration : "none" , color : "#fff"}} onClick = {() => handleAddToCart(item.id)}to = "/cart">Move to Cart</Link> : "" }  */}
                 {!item.isAddedToWish ? "Go to cart" : "Move to Cart" }
               </button>
