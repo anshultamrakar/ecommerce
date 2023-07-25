@@ -24,7 +24,7 @@ const ProductDetails = () => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     getProductDetails()
   },[])
-
+  
   return (
     <div className="productDetails">
        <div className="productDetails_product">
@@ -36,8 +36,8 @@ const ProductDetails = () => {
             <h4>50% OFF</h4>
             <p>{productDetailsItem?.description}</p>
             <div className="productDetails_btns">
-            <button  onClick={() => handleWishList(productDetailsItem.id)} >Save for later</button>
-            <button   onClick={() => handleAddToCart(productDetailsItem.id)}>
+            <button  onClick={() => handleWishList(productDetailsItem._id)} >Save for later</button>
+            <button   onClick={() => handleAddToCart(productDetailsItem._id)}>
               Add To Cart
             </button>
             </div>

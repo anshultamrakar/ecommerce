@@ -63,31 +63,43 @@ const DataProvider = ({ children }) => {
   }
 
 
-  const calculateTotalPrice  = () => {
-   const totalprice = cartItems.reduce((acc , value ) => acc + Number(value.price) * value.quantity , 0)
-   setItemPrice(totalprice)
-  }
-
 
   const handleAddToCart = async(product) => {
-    const token = localStorage.getItem("token")
     try{
      const response = await axios.post("/api/user/cart" , {product} , {
        headers : {
-        authorization : token
+        authorization : localStorage.getItem("token")
        }
      })
      if(response?.status === 201){
-      toast.success("Item Added to the cart page")
-      const isAddedToCart = products.map(item => item.id === product.id ? {...item , isAddedToCart: !item.isAddedToCart} : item) 
-      setProducts(isAddedToCart)
-      getCartItems()
+      if(!cartItems.some(item => item._id === product._id)){
+        setCartItems(response?.data?.cart)
+        toast.success("Item Added to the cart page")
+        setProducts(products.map(item => item._id === product._id ? {...item , isAddedToCart: !item.isAddedToCart} : item) )
+      }else{
+        toast.success("Item is already in cart")
+      }
      }
     }catch(err){
       console.log(err)
     }
   };
 
+
+  const handleUpdateQty = async(productId , type) => {
+    try{
+      const response = await axios.post(`/api/user/cart/${productId}` , {action : {
+        type
+      }} , {
+        headers : {
+          authorization : localStorage.getItem("token")
+        }
+      })
+      setCartItems(response?.data?.cart)
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   const handleWishList = async(product) => {
     try{
@@ -96,15 +108,14 @@ const DataProvider = ({ children }) => {
           authorization : localStorage.getItem("token")
         }
       })
+     if(!wishItems.some(item => item._id === product._id)){
       setWishItems(response?.data?.wishlist)
-      const isAddedInWish = products.map(item => item._id === product._id ? {...item , isAddedToWish : !item.isAddedToWish} : item)
-      setProducts(isAddedInWish)
-      if(wishItems.find(item => item._id === product._id)){
-        toast.success("Item Already added to wish list ")
-      }
-      
-      
-     
+      setProducts(products.map(item => item._id === product._id  ? {...item , isAddedToWish : !item.isAddedToWish} : item))
+      toast.success("Item is added in the wishlist")
+     }else{
+      handleRemoveWishlist(product._id)
+      setProducts(products.map(item => item._id === product._id  ? {...item , isAddedToWish : !item.isAddedToWish} : item))
+     }
     }catch(err){
       console.log(err)
     }
@@ -145,6 +156,7 @@ const DataProvider = ({ children }) => {
       }
      })
      setWishItems(response?.data?.wishlist)
+     toast.success("Item removed from the wishlist")
     }catch(err){
       console.log(err)
     }
@@ -158,6 +170,7 @@ const DataProvider = ({ children }) => {
       }
     })
     setCartItems(response?.data?.cart)
+    toast.success("Item removed from the cart")
    }catch(err){
     console.log(err)
    }
@@ -169,13 +182,14 @@ const DataProvider = ({ children }) => {
         products,
         isLoading,
         search,
-        itemPrice , setItemPrice, calculateTotalPrice, 
+        itemPrice , setItemPrice, 
         setSearch,
         searchResult, 
         setSearchResult,
         originalProductData,
         setOriginalProductData,
         handleAddToCart,
+        handleUpdateQty,
         getProductData,
         checkboxFilter , setCheckBoxFilter,
         categories,
