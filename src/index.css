@@ -458,7 +458,7 @@ button{
   padding: 20px;
   margin-top: 269px;
   width: 500px;
-  height: 320px;
+  height: 403px;
   display: flex;
   flex-direction: column;
   gap : 10px;
@@ -466,6 +466,7 @@ button{
 
 .price_details_list{
   font-size: 1rem;
+  margin: 10px;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
@@ -645,24 +646,38 @@ textarea {
 .checkout{
   min-height: 100vh;
   margin-top: 200px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+ 
 }
 
-
-/* account page */
-.account{
-  min-height: 100vh;
-  margin-top: 200px;
-  text-align: center;
+.checkout_layout{
+  display: flex;
+  justify-content: space-around;
+  margin: 50px;
 }
 
-.active{
-  background-color: #38bdf8;
-  font-size: 1.5rem;
-  padding: 0.8rem;
+.checkout_items{
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px;
 }
-.account_tabs{
-  width: 400px;
-  height: 300px;
-  border: 2px solid gray;
+
+.checkout_listItems{
+ 
 }
+
+.checkout-address{
+
+}
+
+.checkout_order_summary{
+  width: 24%;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 30px;
+}
+

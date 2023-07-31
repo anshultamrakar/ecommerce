@@ -17,11 +17,7 @@ import AuthProvider from './Context/AuthContext';
 import ProductDetails from './Components/ProductDetails';
 import Layout from './Components/Layout';
 
-
 function App() {
-
- 
-
   return (
     <div >
      <DataProvider>
@@ -29,9 +25,7 @@ function App() {
         <Routes>
         <Route path = "/" element = {<Layout/>}>
         <Route path = "/" element = {<Home/>}/>
-        <Route  element = {<RequireAuth/>}>
         <Route path = "/checkout" element = {<Checkout/>}/>
-        </Route>
         <Route path = "/wishlist" element = {<WishList/>}/>
         <Route path = "/cart" element = {<Cart/>}/>
         <Route path = "/product" element = {<Products/>}/>

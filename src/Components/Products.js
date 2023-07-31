@@ -5,19 +5,16 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "../Context/DataContext";
 import FilterInput from "./FilterInput";
-import { toast } from "react-toastify";
+
 
 
 const Products = () => {
-  const {products  , handleAddToCart , handleWishList , checkboxFilter } = useContext(DataContext)
-  
+  const {  handleAddToCart, handleWishList , filterResult } = useContext(DataContext)
+ 
 useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
 },[])
 
-
-
- const filteredProducts =  checkboxFilter.length > 0 ?  products.filter(item => checkboxFilter.includes(item.categoryName)) : products
 
   return (
     <div className="Product_list">
@@ -25,10 +22,10 @@ useEffect(() => {
       <div className="product_listItems">
         <h2>
           Showing All Products
-          <span className="qty_product">({`Showing ${products.length} products`})</span>
+          <span className="qty_product">({`Showing ${filterResult.length} products`})</span>
         </h2>
         <ul className="product-items">
-          {filteredProducts.map((product) => (
+          {filterResult.map((product) => (
             <li className="product-list" key={product.id}>
              <Link to = {`${product._id}`}><img src={product.img} /></Link> 
               <h4>{product.title}</h4>

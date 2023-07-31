@@ -5,7 +5,7 @@ import PriceDetails from "./PriceDetails";
 
 
 const Cart = () => {
-  const { cartItems  , handleRemoveCart  , handleWishList, handleUpdateQty} = useContext(DataContext);
+  const { cartItems  , handleRemoveCart , handleWishList, handleUpdateQty} = useContext(DataContext);
 
   return (
     <div className="cartItem_layout">
@@ -28,7 +28,7 @@ const Cart = () => {
                     <button disabled = {item.qty === 1 ? true : false}  onClick= {() => handleUpdateQty(item._id , "decrement")}>-</button>
                   </div>
                   <button onClick={() => handleRemoveCart(item._id)}>Remove from Cart</button>
-                  <button onClick={() => handleWishList(item._id) }>Move to Wishlist</button>
+                  <button onClick={() => handleWishList(item) }>Move to Wishlist</button>
                 </div>
               </li>
             ))}

@@ -1,21 +1,19 @@
 import React from "react";
 import SofaImg from "../Assets/Images/sofa-gb7b3992cb_1280.png";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link , useNavigate } from "react-router-dom";
+import { useContext   } from "react";
 import { DataContext } from "../Context/DataContext";
 import { useEffect  , useState} from "react";
 
 
 
 const Home = () => {
-const {categories , products , setProducts , handleCategoryFilter} = useContext(DataContext)
-
+  const {categories , handleCategoryFilter } = useContext(DataContext)
 
   useEffect(() => {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }, [])
-
-
+  
   return (
     <div className="Home">
       <div className="Home_image">
@@ -49,14 +47,12 @@ const {categories , products , setProducts , handleCategoryFilter} = useContext(
         <hr/>
         <ul className="category">
           {categories.map(category => (
-          <li className="category_list legend" key = {category.id}>
-              <Link to = "/product"><img onClick={() => handleCategoryFilter(category?.categoryName)} src = {category.imgUrl}/></Link> 
+          <li className="category_list legend" key = {category._id}>
+              <img  onClick={() => handleCategoryFilter(category?.categoryName)} src = {category.imgUrl}/>
               <h4>{category.categoryName}</h4>
             </li>
           ))}
         </ul>
-   
-       
       </div>
     </div>
   );
