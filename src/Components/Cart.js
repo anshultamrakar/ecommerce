@@ -5,7 +5,8 @@ import PriceDetails from "./PriceDetails";
 
 
 const Cart = () => {
-  const { cartItems  , handleRemoveCart , handleWishList, handleUpdateQty} = useContext(DataContext);
+  const { cartItems  , handleRemoveCart  , handleWishList, handleUpdateQty} = useContext(DataContext);
+  
 
   return (
     <div className="cartItem_layout">

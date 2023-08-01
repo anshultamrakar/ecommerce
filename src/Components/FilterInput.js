@@ -7,15 +7,17 @@ const categoryInput = ['Sofas' , "Bed" ,  "Tables" , "Chairs" , "Wardrobe" , "Di
 const ratingInput = ["4star" , "3star", "2star", "1star"]
 
 const FilterInput = () => {
-  const { sortOption ,  setSortOption ,  ratingOption , setRatingOption , priceVal , setPriceVal , handleCheckInput   } = useContext(DataContext)
+  const { sortOption ,  setSortOption ,  ratingOption , setRatingOption , priceVal , setPriceVal , handleCheckInput } = useContext(DataContext)
 
-
+ const handleClearValues = () => {
+   console.log("hello")
+ }
 
   return (
        <aside>
         <div className="filter_heading">
           <h2>Filters</h2>
-          <h4 style = {{textDecoration : "underline"}} >Clear</h4>
+          <h4 style = {{textDecoration : "underline"}} onClick={handleClearValues} >Clear</h4>
         </div>
         <div className="filter_price">
           <label htmlFor="pricerange">Price </label>

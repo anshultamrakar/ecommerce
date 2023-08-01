@@ -45,7 +45,7 @@ const Login = () => {
       })
       const accessToken = response?.data?.encodedToken
       localStorage.setItem("token" , accessToken)
-      toast.success("Login Succesfully")
+      toast.success("Login succesfull")
       setAuth({ user, pwd, accessToken });
       setUser('');
       setPwd('');

@@ -32,9 +32,9 @@ const DataProvider = ({ children }) => {
 
 
   useEffect(() => {
-   const filteredResult = products.filter(item => item.price < priceVal)
+   const filteredResult = products.filter(item => item.price <= priceVal)
    setFilterResult(filteredResult)
-  } , [priceVal])
+  } , [products , priceVal])
 
   useEffect(() => {
     if(checkboxFilter.length > 0){

@@ -19,7 +19,8 @@ const WishList = () => {
              <img src={item.img} />
               <h4>{item.title}</h4>
               <p> ₹ {item.price}</p>
-              <button onClick = {() => handleAddToCart(item)}>
+              <button onClick = {() => handleAddToCart(item._id)}>
+               {/* {item.isAddedToWish ? <Link style = {{textDecoration : "none" , color : "#fff"}} onClick = {() => handleAddToCart(item.id)}to = "/cart">Move to Cart</Link> : "" }  */}
                 {!item.isAddedToWish ? "Go to cart" : "Move to Cart" }
               </button>
               <div className="like-wishlist">
